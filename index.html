@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Fast Cash</title>
 
-<!-- Favicon using favicon.jpg -->
-<link rel="icon" href="favicon.jpg" type="image/jpeg" />
+<!-- Favicon (Ensure you upload favicon.ico to your repo) -->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 
 <!-- Google AdSense Script -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4335653991954613"
@@ -35,7 +35,7 @@
     overflow: hidden;
   }
 
-  /* Side ad/style for placeholders */
+  /* Side ad styles */
   .side-ad {
     width: 160px;
     background-color: #e0e0e0;
@@ -56,27 +56,14 @@
     min-width: 300px;
   }
 
-  /* Fallback spot style */
-  .fallback-spot {
-    width: 100%;
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #fafafa;
-    border: 2px dashed #ccc;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 1.2em;
-    color: #555;
-  }
-
-  /* Heading styles */
+  /* Headings */
   h1, h2 {
     margin-top: 0;
     margin-bottom: 10px;
     color: #333;
   }
 
-  /* Button styles */
+  /* Buttons */
   button {
     padding: 12px 25px;
     font-size: 1em;
@@ -92,18 +79,28 @@
     background-color: #45a049;
   }
 
-  /* Coin display style */
+  /* Coin display */
   #coinDisplay {
     font-weight: 700;
     font-size: 1.2em;
     margin-left: 10px;
+  }
+
+  /* Responsive */
+  @media(max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+    .side-ad {
+      width: 100%;
+    }
   }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <!-- Left Ad Spot -->
+  <!-- Left Ad -->
   <div class="side-ad" id="leftAd">
     <ins class="adsbygoogle"
          style="display:block; width:160px; height:600px;"
@@ -111,7 +108,7 @@
          data-ad-slot="1234567890"></ins>
   </div>
 
-  <!-- Main Content Area -->
+  <!-- Main Content -->
   <div class="main">
     <h1>Watch Ads & Earn Coins</h1>
     <div style="display:flex; align-items:center; margin-top:10px;">
@@ -121,17 +118,11 @@
     <button id="watchAdBtn">Watch Ad (+5 coins)</button>
 
     <h2 style="margin-top:30px;">Withdraw</h2>
-    <p>You can withdraw $1 when you reach 250 coins.</p>
+    <p>You can withdraw money based on coins: 250 coins = $1.00</p>
     <button id="withdrawBtn">Withdraw</button>
     <div id="withdrawMessage" style="margin-top:15px; font-weight: bold;"></div>
 
-    <!-- Fallback spot for extra content -->
-    <div class="fallback-spot" id="fallbackSpot">
-      <p>Here is a fallback spot for extra content or ads.</p>
-    </div>
-  </div>
-
-  <!-- Right Ad Spot -->
+  <!-- Right Ad -->
   <div class="side-ad" id="rightAd">
     <ins class="adsbygoogle"
          style="display:block; width:160px; height:600px;"
@@ -141,6 +132,7 @@
 </div>
 
 <script>
+  // Load ads
   (adsbygoogle = window.adsbygoogle || []).push({});
 
   let coins = 0;
@@ -149,21 +141,23 @@
     document.getElementById('coinDisplay').innerText = coins;
   }
 
-  // When user clicks to watch ad
+  // Watch ad
   document.getElementById('watchAdBtn').addEventListener('click', () => {
     coins += 5;
     updateCoins();
   });
 
-  // When user clicks to withdraw
+  // Withdraw
   document.getElementById('withdrawBtn').addEventListener('click', () => {
-    if (coins >= 250) {
-      const dollars = Math.floor(coins / 250); // How much money
-      const remainingCoins = coins % 250; // Coins left after withdrawal
-      coins = remainingCoins; // Keep remaining coins
+    if (coins >= 1) {
+      // Convert coins to dollars with cents
+      const totalCents = (coins * 100) / 250;
+      const dollars = totalCents.toFixed(2);
+      
+      coins = 0; // Reset coins after withdrawal
       updateCoins();
-
-      document.getElementById('withdrawMessage').innerText = `You withdrew $${dollars}. Remaining coins: ${coins}.`;
+      
+      document.getElementById('withdrawMessage').innerText = `You withdrew $${dollars}.`;
     } else {
       document.getElementById('withdrawMessage').innerText = `Not enough coins to withdraw. You need 250 coins for $1.`;
     }
