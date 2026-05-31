@@ -16,66 +16,106 @@
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
   }
 
-  /* Container that holds side ads and main content */
+  /* Container for layout */
   .container {
     display: flex;
-    width: 100%;
-    max-width: 1200px; /* limit the width for large screens */
+    width: 95%;
+    max-width: 1300px;
     margin: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
   }
 
-  /* Side ad styles */
+  /* Side ad/style for placeholders */
   .side-ad {
-    width: 160px; /* typical ad size */
+    width: 160px;
     background-color: #e0e0e0;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     padding: 10px;
     box-sizing: border-box;
   }
 
   /* Main content styles */
   .main {
-    flex: 1;
-    padding: 40px 20px;
+    flex: 3;
+    padding: 40px 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  /* Style for buttons and sections */
+  /* Fallback spot style */
+  .fallback-spot {
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fafafa;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #555;
+  }
+
+  /* Heading styles */
   h1, h2 {
     margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
   }
 
+  /* Button styles */
   button {
-    padding: 10px 20px;
+    padding: 12px 25px;
     font-size: 1em;
-    margin-top: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #45a049;
   }
 
+  /* Coin display style */
   #coinDisplay {
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 1.2em;
+    margin-left: 10px;
   }
 
-  /* Styles for AdSense ads in side panels */
+  /* Ad placeholder styles inside side ads */
   .adsbygoogle {
     display: block;
+  }
+
+  /* Responsive adjustments for smaller screens */
+  @media(max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+    .side-ad {
+      width: 100%;
+      height: auto;
+    }
   }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <!-- Left Side Ad -->
+  <!-- Left Ad Spot -->
   <div class="side-ad" id="leftAd">
     <!-- Google AdSense Ad Unit -->
     <ins class="adsbygoogle"
@@ -84,18 +124,27 @@
          data-ad-slot="1234567890"></ins>
   </div>
 
-  <!-- Main Content -->
+  <!-- Main Content Area -->
   <div class="main">
     <h1>Watch Ads & Earn Coins</h1>
-    <p>Your Coins: <span id="coinDisplay">0</span></p>
+    <div style="display: flex; align-items: center; margin-top: 10px;">
+      <span>Your Coins:</span>
+      <span id="coinDisplay">0</span>
+    </div>
     <button id="watchAdBtn">Watch Ad (+5 coins)</button>
 
-    <h2>Withdraw</h2>
+    <h2 style="margin-top:30px;">Withdraw</h2>
     <p>You can withdraw $1 when you reach 250 coins.</p>
     <button id="withdrawBtn">Withdraw</button>
+
+    <!-- Fallback Spot -->
+    <div class="fallback-spot" id="fallbackSpot">
+      <!-- Placeholder for additional content or ads -->
+      <p>Here is a fallback spot for extra content or ads.</p>
+    </div>
   </div>
 
-  <!-- Right Side Ad -->
+  <!-- Right Ad Spot -->
   <div class="side-ad" id="rightAd">
     <!-- Google AdSense Ad Unit -->
     <ins class="adsbygoogle"
@@ -106,27 +155,28 @@
 </div>
 
 <script>
-  // Load the ads
+  // Load ads
   (adsbygoogle = window.adsbygoogle || []).push({});
 
   let coins = 0;
 
-  // Handle watch ad button
-  document.getElementById('watchAdBtn').addEventListener('click', () => {
-    // Simulate watching an ad
-    coins += 5;
+  // Function to update coins display
+  function updateCoins() {
     document.getElementById('coinDisplay').innerText = coins;
-    alert('Ad watched! +5 coins.');
+  }
+
+  // Handle Watch Ad button
+  document.getElementById('watchAdBtn').addEventListener('click', () => {
+    coins += 5;
+    updateCoins();
   });
 
-  // Handle withdrawal button
+  // Handle Withdraw button
   document.getElementById('withdrawBtn').addEventListener('click', () => {
     if (coins >= 250) {
       coins -= 250;
-      document.getElementById('coinDisplay').innerText = coins;
-      alert('Withdrawal requested! You will receive $1.');
-    } else {
-      alert('Not enough coins to withdraw.');
+      updateCoins();
+      // You can add your withdrawal logic here
     }
   });
 </script>
