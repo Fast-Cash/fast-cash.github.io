@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Reward Ads Game</title>
+<title>Fast Cash</title>
 
 <!-- Favicon using favicon.jpg -->
 <link rel="icon" href="favicon.jpg" type="image/jpeg" />
@@ -98,22 +98,6 @@
     font-size: 1.2em;
     margin-left: 10px;
   }
-
-  /* Ad placeholders inside side ads */
-  .adsbygoogle {
-    display: block;
-  }
-
-  /* Responsive adjustments for smaller screens */
-  @media(max-width: 768px) {
-    .container {
-      flex-direction: column;
-    }
-    .side-ad {
-      width: 100%;
-      height: auto;
-    }
-  }
 </style>
 </head>
 <body>
@@ -121,7 +105,6 @@
 <div class="container">
   <!-- Left Ad Spot -->
   <div class="side-ad" id="leftAd">
-    <!-- Google AdSense Ad Unit -->
     <ins class="adsbygoogle"
          style="display:block; width:160px; height:600px;"
          data-ad-client="ca-pub-4335653991954613"
@@ -131,7 +114,7 @@
   <!-- Main Content Area -->
   <div class="main">
     <h1>Watch Ads & Earn Coins</h1>
-    <div style="display: flex; align-items: center; margin-top: 10px;">
+    <div style="display:flex; align-items:center; margin-top:10px;">
       <span>Your Coins:</span>
       <span id="coinDisplay">0</span>
     </div>
@@ -140,6 +123,7 @@
     <h2 style="margin-top:30px;">Withdraw</h2>
     <p>You can withdraw $1 when you reach 250 coins.</p>
     <button id="withdrawBtn">Withdraw</button>
+    <div id="withdrawMessage" style="margin-top:15px; font-weight: bold;"></div>
 
     <!-- Fallback spot for extra content -->
     <div class="fallback-spot" id="fallbackSpot">
@@ -149,7 +133,6 @@
 
   <!-- Right Ad Spot -->
   <div class="side-ad" id="rightAd">
-    <!-- Google AdSense Ad Unit -->
     <ins class="adsbygoogle"
          style="display:block; width:160px; height:600px;"
          data-ad-client="ca-pub-4335653991954613"
@@ -158,27 +141,31 @@
 </div>
 
 <script>
-  // Initialize ads
   (adsbygoogle = window.adsbygoogle || []).push({});
 
   let coins = 0;
 
-  // Function to update coin display
   function updateCoins() {
     document.getElementById('coinDisplay').innerText = coins;
   }
 
-  // Watch ad button
+  // When user clicks to watch ad
   document.getElementById('watchAdBtn').addEventListener('click', () => {
     coins += 5;
     updateCoins();
   });
 
-  // Withdraw button
+  // When user clicks to withdraw
   document.getElementById('withdrawBtn').addEventListener('click', () => {
     if (coins >= 250) {
-      coins -= 250;
+      const dollars = Math.floor(coins / 250); // How much money
+      const remainingCoins = coins % 250; // Coins left after withdrawal
+      coins = remainingCoins; // Keep remaining coins
       updateCoins();
+
+      document.getElementById('withdrawMessage').innerText = `You withdrew $${dollars}. Remaining coins: ${coins}.`;
+    } else {
+      document.getElementById('withdrawMessage').innerText = `Not enough coins to withdraw. You need 250 coins for $1.`;
     }
   });
 </script>
