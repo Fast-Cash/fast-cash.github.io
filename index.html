@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Reward Ads Game</title>
+
+<!-- Google AdSense Script -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4335653991954613"
+     crossorigin="anonymous"></script>
+
+<style>
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+
+  /* Container that holds side ads and main content */
+  .container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px; /* limit the width for large screens */
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: #fff;
+  }
+
+  /* Side ad styles */
+  .side-ad {
+    width: 160px; /* typical ad size */
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Main content styles */
+  .main {
+    flex: 1;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Style for buttons and sections */
+  h1, h2 {
+    margin-top: 0;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  #coinDisplay {
+    font-weight: bold;
+  }
+
+  /* Styles for AdSense ads in side panels */
+  .adsbygoogle {
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Left Side Ad -->
+  <div class="side-ad" id="leftAd">
+    <!-- Google AdSense Ad Unit -->
+    <ins class="adsbygoogle"
+         style="display:block; width:160px; height:600px;"
+         data-ad-client="ca-pub-4335653991954613"
+         data-ad-slot="1234567890"></ins>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <h1>Watch Ads & Earn Coins</h1>
+    <p>Your Coins: <span id="coinDisplay">0</span></p>
+    <button id="watchAdBtn">Watch Ad (+5 coins)</button>
+
+    <h2>Withdraw</h2>
+    <p>You can withdraw $1 when you reach 250 coins.</p>
+    <button id="withdrawBtn">Withdraw</button>
+  </div>
+
+  <!-- Right Side Ad -->
+  <div class="side-ad" id="rightAd">
+    <!-- Google AdSense Ad Unit -->
+    <ins class="adsbygoogle"
+         style="display:block; width:160px; height:600px;"
+         data-ad-client="ca-pub-4335653991954613"
+         data-ad-slot="0987654321"></ins>
+  </div>
+</div>
+
+<script>
+  // Load the ads
+  (adsbygoogle = window.adsbygoogle || []).push({});
+
+  let coins = 0;
+
+  // Handle watch ad button
+  document.getElementById('watchAdBtn').addEventListener('click', () => {
+    // Simulate watching an ad
+    coins += 5;
+    document.getElementById('coinDisplay').innerText = coins;
+    alert('Ad watched! +5 coins.');
+  });
+
+  // Handle withdrawal button
+  document.getElementById('withdrawBtn').addEventListener('click', () => {
+    if (coins >= 250) {
+      coins -= 250;
+      document.getElementById('coinDisplay').innerText = coins;
+      alert('Withdrawal requested! You will receive $1.');
+    } else {
+      alert('Not enough coins to withdraw.');
+    }
+  });
+</script>
+
+</body>
+</html>
