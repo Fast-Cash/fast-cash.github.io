@@ -171,7 +171,7 @@
     if (coins >= 1) {
       // Convert coins to dollars with cents
       const totalCents = (coins * 100) / 250;
-      const dollars = totalCents.toFixed(2);
+      const dollars = totalCents.toFixed(0.02);
       
       coins = 0; // Reset coins after withdrawal
       updateCoins();
