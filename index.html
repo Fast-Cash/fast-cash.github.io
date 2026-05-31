@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Reward Ads Game</title>
 
+<!-- Favicon -->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+
 <!-- Google AdSense Script -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4335653991954613"
      crossorigin="anonymous"></script>
@@ -50,6 +53,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 300px;
   }
 
   /* Fallback spot style */
@@ -95,7 +99,7 @@
     margin-left: 10px;
   }
 
-  /* Ad placeholder styles inside side ads */
+  /* Ad placeholders inside side ads */
   .adsbygoogle {
     display: block;
   }
@@ -137,9 +141,8 @@
     <p>You can withdraw $1 when you reach 250 coins.</p>
     <button id="withdrawBtn">Withdraw</button>
 
-    <!-- Fallback Spot -->
+    <!-- Fallback spot for extra content -->
     <div class="fallback-spot" id="fallbackSpot">
-      <!-- Placeholder for additional content or ads -->
       <p>Here is a fallback spot for extra content or ads.</p>
     </div>
   </div>
@@ -155,23 +158,23 @@
 </div>
 
 <script>
-  // Load ads
+  // Initialize ads
   (adsbygoogle = window.adsbygoogle || []).push({});
 
   let coins = 0;
 
-  // Function to update coins display
+  // Function to update the coin count display
   function updateCoins() {
     document.getElementById('coinDisplay').innerText = coins;
   }
 
-  // Handle Watch Ad button
+  // Watch ad button event
   document.getElementById('watchAdBtn').addEventListener('click', () => {
     coins += 5;
     updateCoins();
   });
 
-  // Handle Withdraw button
+  // Withdraw button event
   document.getElementById('withdrawBtn').addEventListener('click', () => {
     if (coins >= 250) {
       coins -= 250;
