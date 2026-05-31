@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Fast Cash</title>
+<title>Fast Cash Rewards</title>
 
-<!-- Favicon (your favicon.jpg) -->
+<!-- Favicon (your favicon.jpg, for best look convert to .ico for actual use) -->
 <link rel="icon" href="favicon.jpg" type="image/jpeg" />
 
 <!-- Google AdSense Script -->
@@ -15,7 +15,7 @@
   body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #eef2f3;
+    background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -23,25 +23,22 @@
 
   .container {
     display: flex;
-    max-width: 1250px;
+    max-width: 1300px;
     width: 100%;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    border-radius: 12px;
+    border-radius: 15px;
     overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     background: #fff;
   }
 
-  /* Side ads */
+  /* Side ads styling */
   .side-ad {
     width: 160px;
-    background: #e0e0e0;
+    background: #f0f0f0;
     padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
-  /* Main content */
+  /* Main content styling */
   .main {
     flex: 1;
     padding: 40px 30px;
@@ -51,65 +48,80 @@
   }
 
   h1 {
-    margin-top: 0;
-    font-size: 2em;
+    font-size: 2.5em;
     color: #333;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
   }
 
-  /* Stats */
-  .stats {
+  /* Stats box */
+  .stats-box {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 20px;
+  }
+
+  .stats-box span {
     font-size: 1.2em;
+    font-weight: 600;
+    margin-right: 15px;
   }
 
   #coinDisplay {
+    font-size: 1.5em;
     font-weight: bold;
-    margin-left: 10px;
     color: #2c3e50;
   }
 
-  /* Buttons */
+  /* Buttons styling */
   button {
-    margin-top: 20px;
-    padding: 14px 24px;
-    font-size: 1em;
+    margin-top: 25px;
+    padding: 15px 30px;
+    font-size: 1.1em;
     border: none;
-    border-radius: 8px;
-    background: #27ae60;
-    color: #fff;
+    border-radius: 20px;
     cursor: pointer;
-    transition: background 0.3s;
-  }
-  button:hover {
-    background: #219150;
+    background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
   }
 
-  /* Input styles */
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+
+  /* Input styling */
   input[type="email"] {
-    padding: 10px;
-    margin-top: 15px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    width: 250px;
+    padding: 12px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 12px;
+    border: 2px solid #ccc;
     font-size: 1em;
   }
 
-  /* Message */
+  /* Messages */
   #withdrawMsg {
     margin-top: 15px;
-    font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #444;
   }
 
-  /* Responsive */
+  /* Responsive adjustments */
   @media(max-width: 768px) {
     .container {
       flex-direction: column;
     }
     .side-ad {
       width: 100%;
+      height: auto;
     }
   }
 </style>
@@ -128,26 +140,27 @@
   <!-- Main Content -->
   <div class="main">
     <h1>Earn & Withdraw Money</h1>
-    <div class="stats">
-      <div>Your Coins: </div>
+    <div class="stats-box">
+      <span>Your Coins:</span>
       <div id="coinDisplay">0</div>
     </div>
+
     <button id="watchAdBtn">Watch Ad (+5 coins)</button>
 
-    <div style="margin-top:30px; width:100%; max-width:500px;">
+    <div style="margin-top:40px; width:100%; max-width:500px;">
       <h2>Withdraw Funds</h2>
       <p>Minimum withdrawal is $5.00 (250 cents). Your total earned: <span id="totalEarnedDisplay">$0.00</span></p>
       
       <input type="email" id="emailInput" placeholder="Enter your PayPal email" />
-      
+
       <button id="withdrawBtn">Withdraw</button>
       
       <div id="withdrawMsg"></div>
     </div>
 
-    <!-- Additional info -->
-    <div class="fallback-spot" style="margin-top:30px; padding:15px; background:#f9f9f9; border-radius:8px; border:1px dashed #ccc;">
-      <p>Additional info or ads can go here.</p>
+    <!-- Extra info -->
+    <div style="margin-top:30px; padding:15px; background:#f0f0f0; border-radius:10px;">
+      <p style="margin:0;">Earn coins by watching ads. The more coins you earn, the more you can withdraw!</p>
     </div>
   </div>
 
@@ -161,27 +174,34 @@
 </div>
 
 <script>
-  // Load ads
   (adsbygoogle = window.adsbygoogle || []).push({});
 
-  let coins = 0;
-  let totalCentsEarned = 0;
+  // Load saved progress
+  let coins = parseInt(localStorage.getItem('coins')) || 0;
+  let totalCentsEarned = parseInt(localStorage.getItem('totalCentsEarned')) || 0;
 
   function updateDisplay() {
     document.getElementById('coinDisplay').innerText = coins;
-    document.getElementById('totalEarnedDisplay').innerText = `$${(totalCentsEarned / 100).toFixed(2)}`;
+    document.getElementById('totalEarnedDisplay').innerText = `$${(totalCentsEarned/100).toFixed(2)}`;
   }
 
-  // Watch ad - adds 5 coins and 2 cents
+  // Save progress
+  function saveProgress() {
+    localStorage.setItem('coins', coins);
+    localStorage.setItem('totalCentsEarned', totalCentsEarned);
+  }
+
+  // Add coins and cents from watching ad
   document.getElementById('watchAdBtn').addEventListener('click', () => {
     coins += 5;
-    totalCentsEarned += 2;  // 5 coins = 2 cents
+    totalCentsEarned += 2; // 5 coins = 2 cents
     updateDisplay();
+    saveProgress();
   });
 
   // Withdraw
- document.getElementById('withdrawBtn').addEventListener('click', () => {
-    if (totalCentsEarned >= 250) { // $5 minimum
+  document.getElementById('withdrawBtn').addEventListener('click', () => {
+    if (totalCentsEarned >= 250) { // min $5
       const amountCents = totalCentsEarned;
       const amountDollars = (amountCents / 100).toFixed(2);
       const email = document.getElementById('emailInput').value.trim();
@@ -191,24 +211,28 @@
         return;
       }
 
-      // Reset
+      // Reset earnings and coins
       totalCentsEarned = 0;
       coins = 0;
       updateDisplay();
+      saveProgress();
 
-      // Show success message
+      // Show message
       document.getElementById('withdrawMsg').innerHTML = `$${amountDollars} sent to ${email} via PayPal or card.`;
-      
-      // Here you would connect to your payment API to process payout
     } else {
       document.getElementById('withdrawMsg').innerText = 'Minimum withdrawal is $5.00. Keep earning!';
     }
   });
 
+  // Email validation
   function validateEmail(email) {
     const re = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
     return re.test(email);
   }
+
+  // Initialize display
+  updateDisplay();
+
 </script>
 
 </body>
