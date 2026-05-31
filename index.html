@@ -56,6 +56,19 @@
     min-width: 300px;
   }
 
+  /* Fallback spot for extra content */
+  .fallback-spot {
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fafafa;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #555;
+  }
+
   /* Headings */
   h1, h2 {
     margin-top: 0;
@@ -121,6 +134,12 @@
     <p>You can withdraw money based on coins: 250 coins = $1.00</p>
     <button id="withdrawBtn">Withdraw</button>
     <div id="withdrawMessage" style="margin-top:15px; font-weight: bold;"></div>
+
+    <!-- Extra Content / Placeholder -->
+    <div class="fallback-spot" id="fallbackSpot">
+      <p>Here is a fallback spot for extra content or ads.</p>
+    </div>
+  </div>
 
   <!-- Right Ad -->
   <div class="side-ad" id="rightAd">
