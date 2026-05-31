@@ -5,98 +5,102 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Fast Cash</title>
 
-<!-- Favicon (Ensure you upload favicon.ico to your repo) -->
+<!-- Favicon (Ensure your favicon.ico is uploaded) -->
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
 <!-- Google AdSense Script -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4335653991954613"
-     crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4335653991954613" crossorigin="anonymous"></script>
 
 <style>
   body {
     margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef2f3;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f9;
+    padding: 20px;
   }
 
-  /* Container for layout */
   .container {
     display: flex;
-    width: 95%;
-    max-width: 1300px;
-    margin: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    background: #fff;
-    border-radius: 8px;
+    max-width: 1250px;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border-radius: 12px;
     overflow: hidden;
+    background: #fff;
   }
 
-  /* Side ad styles */
+  /* Side ads */
   .side-ad {
     width: 160px;
-    background-color: #e0e0e0;
+    background: #e0e0e0;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    box-sizing: border-box;
   }
 
-  /* Main content styles */
+  /* Main content */
   .main {
-    flex: 3;
+    flex: 1;
     padding: 40px 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 300px;
   }
 
-  /* Fallback spot for extra content */
-  .fallback-spot {
-    width: 100%;
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #fafafa;
-    border: 2px dashed #ccc;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 1.2em;
-    color: #555;
-  }
-
-  /* Headings */
-  h1, h2 {
+  h1 {
     margin-top: 0;
-    margin-bottom: 10px;
+    font-size: 2em;
     color: #333;
+  }
+
+  /* Stats */
+  .stats {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 1.2em;
+  }
+
+  #coinDisplay {
+    font-weight: bold;
+    margin-left: 10px;
+    color: #2c3e50;
   }
 
   /* Buttons */
   button {
-    padding: 12px 25px;
+    margin-top: 20px;
+    padding: 14px 24px;
     font-size: 1em;
-    margin-top: 15px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
+    background: #27ae60;
+    color: #fff;
     cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s;
   }
   button:hover {
-    background-color: #45a049;
+    background: #219150;
   }
 
-  /* Coin display */
-  #coinDisplay {
-    font-weight: 700;
-    font-size: 1.2em;
-    margin-left: 10px;
+  /* Input fields */
+  input[type="email"] {
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 250px;
+    font-size: 1em;
+  }
+
+  /* Message display */
+  #withdrawMsg {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 1.1em;
   }
 
   /* Responsive */
@@ -106,6 +110,7 @@
     }
     .side-ad {
       width: 100%;
+      height: auto;
     }
   }
 </style>
@@ -123,21 +128,27 @@
 
   <!-- Main Content -->
   <div class="main">
-    <h1>Watch Ads & Earn Coins</h1>
-    <div style="display:flex; align-items:center; margin-top:10px;">
-      <span>Your Coins:</span>
-      <span id="coinDisplay">0</span>
+    <h1>Earn & Withdraw Money</h1>
+    <div class="stats">
+      <div>Your Coins: </div>
+      <div id="coinDisplay">0</div>
     </div>
     <button id="watchAdBtn">Watch Ad (+5 coins)</button>
 
-    <h2 style="margin-top:30px;">Withdraw</h2>
-    <p>You can withdraw money based on coins: 250 coins = $1.00</p>
-    <button id="withdrawBtn">Withdraw</button>
-    <div id="withdrawMessage" style="margin-top:15px; font-weight: bold;"></div>
+    <div style="margin-top:30px; width:100%; max-width:500px;">
+      <h2>Withdraw Funds</h2>
+      <p>Minimum withdrawal is $5.00 (250 cents). Your total earned: <span id="totalEarnedDisplay">$0.00</span></p>
+      
+      <input type="email" id="emailInput" placeholder="Enter your PayPal email" />
+      
+      <button id="withdrawBtn">Withdraw</button>
+      
+      <div id="withdrawMsg"></div>
+    </div>
 
-    <!-- Extra Content / Placeholder -->
-    <div class="fallback-spot" id="fallbackSpot">
-      <p>Here is a fallback spot for extra content or ads.</p>
+    <!-- Extra content placeholder -->
+    <div class="fallback-spot" style="margin-top:30px; padding:15px; background:#f9f9f9; border-radius:8px; border:1px dashed #ccc;">
+      <p>Additional info or ads can go here.</p>
     </div>
   </div>
 
@@ -151,35 +162,79 @@
 </div>
 
 <script>
-  // Load ads
+  // Initialize ads
   (adsbygoogle = window.adsbygoogle || []).push({});
 
+  // Variables to track coins and total earned
   let coins = 0;
+  let totalCentsEarned = 0;
 
-  function updateCoins() {
+  function updateDisplay() {
     document.getElementById('coinDisplay').innerText = coins;
+    document.getElementById('totalEarnedDisplay').innerText = `$${(totalCentsEarned / 100).toFixed(2)}`;
   }
 
-  // Watch ad
+  // Watch ad button
   document.getElementById('watchAdBtn').addEventListener('click', () => {
     coins += 5;
-    updateCoins();
+    updateDisplay();
   });
 
-  // Withdraw
+  // Withdraw button
   document.getElementById('withdrawBtn').addEventListener('click', () => {
-    if (coins >= 1) {
-      // Convert coins to dollars with cents
-      const totalCents = (coins * 100) / 250;
-      const dollars = totalCents.toFixed(0.02);
-      
-      coins = 0; // Reset coins after withdrawal
-      updateCoins();
-      
-      document.getElementById('withdrawMessage').innerText = `You withdrew $${dollars}.`;
+    const minCents = 250; // $5.00
+    if (totalCentsEarned >= minCents) {
+      // Calculate amount to withdraw
+      const amountToWithdrawCents = totalCentsEarned;
+      const amountToWithdrawDollars = (amountToWithdrawCents / 100).toFixed(2);
+
+      // Reset totals
+      totalCentsEarned = 0;
+      coins = 0;
+      updateDisplay();
+
+      // Get email
+      const email = document.getElementById('emailInput').value.trim();
+
+      if (!email || !validateEmail(email)) {
+        document.getElementById('withdrawMsg').innerHTML = 'Please enter a valid email.';
+        // Restore total if invalid
+        totalCentsEarned = amountToWithdrawCents;
+        coins = Math.floor((amountToWithdrawCents / 100) * 250);
+        updateDisplay();
+        return;
+      }
+
+      document.getElementById('withdrawMsg').innerHTML = `$${amountToWithdrawDollars} sent to ${email} via PayPal or card.`;
+      // Here you would integrate with your payment API to send money
     } else {
-      document.getElementById('withdrawMessage').innerText = `Not enough coins to withdraw. You need 250 coins for $1.`;
+      document.getElementById('withdrawMsg').innerText = 'Minimum withdrawal is $5.00 (250 cents). Keep earning!';
     }
+  });
+
+  // Helper: Validate email
+  function validateEmail(email) {
+    const re = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+    return re.test(email);
+  }
+
+  // When coins are added, convert to total cents earned
+  // 5 coins = 2 cents
+  // So, total cents earned = coins * (2/5)
+  // Let's update totalCentsEarned whenever coins change
+
+  function updateDisplay() {
+    document.getElementById('coinDisplay').innerText = coins;
+    document.getElementById('totalEarnedDisplay').innerText = `$${(totalCentsEarned / 100).toFixed(2)}`;
+  }
+
+  // When user clicks to watch ad
+  document.getElementById('watchAdBtn').addEventListener('click', () => {
+    coins += 5;
+    // Convert coins to cents earned
+    // 5 coins = 2 cents, so totalCentsEarned += 2
+    totalCentsEarned += 2;
+    updateDisplay();
   });
 </script>
 
