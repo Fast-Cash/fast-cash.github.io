@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Fast Cash</title>
 
-<!-- Favicon (Ensure your favicon.ico is uploaded) -->
-<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<!-- Favicon (your favicon.jpg) -->
+<link rel="icon" href="favicon.jpg" type="image/jpeg" />
 
 <!-- Google AdSense Script -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4335653991954613" crossorigin="anonymous"></script>
@@ -86,7 +86,7 @@
     background: #219150;
   }
 
-  /* Input fields */
+  /* Input styles */
   input[type="email"] {
     padding: 10px;
     margin-top: 15px;
@@ -96,7 +96,7 @@
     font-size: 1em;
   }
 
-  /* Message display */
+  /* Message */
   #withdrawMsg {
     margin-top: 15px;
     font-weight: bold;
@@ -110,7 +110,6 @@
     }
     .side-ad {
       width: 100%;
-      height: auto;
     }
   }
 </style>
@@ -146,7 +145,7 @@
       <div id="withdrawMsg"></div>
     </div>
 
-    <!-- Extra content placeholder -->
+    <!-- Additional info -->
     <div class="fallback-spot" style="margin-top:30px; padding:15px; background:#f9f9f9; border-radius:8px; border:1px dashed #ccc;">
       <p>Additional info or ads can go here.</p>
     </div>
@@ -162,10 +161,9 @@
 </div>
 
 <script>
-  // Initialize ads
+  // Load ads
   (adsbygoogle = window.adsbygoogle || []).push({});
 
-  // Variables to track coins and total earned
   let coins = 0;
   let totalCentsEarned = 0;
 
@@ -174,68 +172,43 @@
     document.getElementById('totalEarnedDisplay').innerText = `$${(totalCentsEarned / 100).toFixed(2)}`;
   }
 
-  // Watch ad button
+  // Watch ad - adds 5 coins and 2 cents
   document.getElementById('watchAdBtn').addEventListener('click', () => {
-    coins += 2.5;
+    coins += 5;
+    totalCentsEarned += 2;  // 5 coins = 2 cents
     updateDisplay();
   });
 
-  // Withdraw button
-  document.getElementById('withdrawBtn').addEventListener('click', () => {
-    const minCents = 250; // $5.00
-    if (totalCentsEarned >= minCents) {
-      // Calculate amount to withdraw
-      const amountToWithdrawCents = totalCentsEarned;
-      const amountToWithdrawDollars = (amountToWithdrawCents / 100).toFixed(2);
-
-      // Reset totals
-      totalCentsEarned = 0;
-      coins = 0;
-      updateDisplay();
-
-      // Get email
+  // Withdraw
+ document.getElementById('withdrawBtn').addEventListener('click', () => {
+    if (totalCentsEarned >= 250) { // $5 minimum
+      const amountCents = totalCentsEarned;
+      const amountDollars = (amountCents / 100).toFixed(2);
       const email = document.getElementById('emailInput').value.trim();
 
       if (!email || !validateEmail(email)) {
         document.getElementById('withdrawMsg').innerHTML = 'Please enter a valid email.';
-        // Restore total if invalid
-        totalCentsEarned = amountToWithdrawCents;
-        coins = Math.floor((amountToWithdrawCents / 100) * 250);
-        updateDisplay();
         return;
       }
 
-      document.getElementById('withdrawMsg').innerHTML = `$${amountToWithdrawDollars} sent to ${email} via PayPal or card.`;
-      // Here you would integrate with your payment API to send money
+      // Reset
+      totalCentsEarned = 0;
+      coins = 0;
+      updateDisplay();
+
+      // Show success message
+      document.getElementById('withdrawMsg').innerHTML = `$${amountDollars} sent to ${email} via PayPal or card.`;
+      
+      // Here you would connect to your payment API to process payout
     } else {
-      document.getElementById('withdrawMsg').innerText = 'Minimum withdrawal is $5.00 (250 cents). Keep earning!';
+      document.getElementById('withdrawMsg').innerText = 'Minimum withdrawal is $5.00. Keep earning!';
     }
   });
 
-  // Helper: Validate email
   function validateEmail(email) {
     const re = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
     return re.test(email);
   }
-
-  // When coins are added, convert to total cents earned
-  // 5 coins = 2 cents
-  // So, total cents earned = coins * (2/5)
-  // Let's update totalCentsEarned whenever coins change
-
-  function updateDisplay() {
-    document.getElementById('coinDisplay').innerText = coins;
-    document.getElementById('totalEarnedDisplay').innerText = `$${(totalCentsEarned / 100).toFixed(2)}`;
-  }
-
-  // When user clicks to watch ad
-  document.getElementById('watchAdBtn').addEventListener('click', () => {
-    coins += 5;
-    // Convert coins to cents earned
-    // 5 coins = 2 cents, so totalCentsEarned += 2
-    totalCentsEarned += 2;
-    updateDisplay();
-  });
 </script>
 
 </body>
